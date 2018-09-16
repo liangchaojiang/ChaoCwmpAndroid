@@ -1,14 +1,5 @@
 LOCAL_PATH := $(call my-dir)
 
-include $(CLEAR_VARS)
-
-
-LOCAL_MODULE    := chaocwmp
-LOCAL_SRC_FILES := native_chao_cwmp.c
-
-
-include $(BUILD_SHARED_LIBRARY)
-
 
 include $(CLEAR_VARS)
 
@@ -44,4 +35,35 @@ LOCAL_LDLIBS := \
 	-lz \
 	-lm
 
+include $(BUILD_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE    := cwmpd
+LOCAL_SRC_FILES := cwmpd/src/conf.c cwmpd/src/cwmpd.c cwmpd/src/httpd.c cwmpd/src/process.c cwmpd/src/thread.c \
+cwmpd/src/agent.c cwmpd/src/data_model.c
+
+LOCAL_STATIC_LIBRARIES := libcwmp
+LOCAL_CFLAGS += -DUSE_CWMP_MEMORY_POOL \
+	-D_GNU_SOURCE  -DSTB_CMCC_MODEL
+
+LOCAL_LDLIBS += \
+	-lz \
+	-lm \
+    -llog\
+
 include $(BUILD_SHARED_LIBRARY)
+
+
+include $(CLEAR_VARS)
+
+
+LOCAL_MODULE    := chaocwmp
+LOCAL_SRC_FILES := native_chao_cwmp.c
+LOCAL_STATIC_LIBRARIES := libcwmpd
+
+LOCAL_LDLIBS += -llog
+
+include $(BUILD_SHARED_LIBRARY)
+
+

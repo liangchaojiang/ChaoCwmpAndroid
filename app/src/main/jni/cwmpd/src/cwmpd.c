@@ -28,6 +28,10 @@
 
 #define CWMP_VALUE_UNSET -1
 
+#include<android/log.h>
+#define LOG_TAG "System.out"
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
 
 
 int              cwmp_argc;
@@ -66,10 +70,10 @@ int cwmp_set_var(cwmp_t * cwmp)
     FUNCTION_TRACE();
 
 
-    cwmp_bzero(cwmp, sizeof(cwmp_t));//³õÊ¼»¯ÄÚ´æ¿Õ¼ä
-    cwmp->new_request = CWMP_TRUE;//´Ë´¦¶Ï¶¨cwmpÎªÐÂÇëÇóÉè±¸Æô¶¯Ê±ÔËÐÐ
-    pool_t * pool = pool_create(POOL_DEFAULT_SIZE);//ÉêÇë³Ø¿Õ¼ä
-    cwmp->pool = pool;//Îªcwmp¸³Óè³Ø¿Õ¼ä
+    cwmp_bzero(cwmp, sizeof(cwmp_t));//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ú´ï¿½Õ¼ï¿½
+    cwmp->new_request = CWMP_TRUE;//ï¿½Ë´ï¿½ï¿½Ï¶ï¿½cwmpÎªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
+    pool_t * pool = pool_create(POOL_DEFAULT_SIZE);//ï¿½ï¿½ï¿½ï¿½Ø¿Õ¼ï¿½
+    cwmp->pool = pool;//Îªcwmpï¿½ï¿½ï¿½ï¿½Ø¿Õ¼ï¿½
 
 
     cwmp_event_init(cwmp);
@@ -117,7 +121,7 @@ int main(int argc, char **argv)
 
     cwmp_conf_open("/system/etc/cwmp.conf");
     
-    cwmp_enable=cwmp_conf_get_int("cwmp:enable");//¶ÁÈ¡ÅäÖÃÎÄ¼þÖÐµÄenableµÄÖµ£¬Ê¹ÄÜ¶ÁÈ¡ÅäÖÃÎÄ¼þ¹¦ÄÜ
+    cwmp_enable=cwmp_conf_get_int("cwmp:enable");//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ðµï¿½enableï¿½ï¿½Öµï¿½ï¿½Ê¹ï¿½Ü¶ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½
     if(!cwmp_enable)
     {
         exit(-1);    
@@ -130,7 +134,7 @@ int main(int argc, char **argv)
     cwmp_set_var(cwmp);
     cwmp_daemon();
     
-    cwmp_conf_init(cwmp);//½«cwmp.confÄÚÈÝ¸³¸øcwmp
+    cwmp_conf_init(cwmp);//ï¿½ï¿½cwmp.confï¿½ï¿½ï¿½Ý¸ï¿½ï¿½ï¿½cwmp
 
 #ifdef USE_CWMP_OPENSSL
     cwmp_init_ssl(cwmp);
@@ -143,7 +147,7 @@ int main(int argc, char **argv)
 }
 
 
-int tr069launch(int argc, char **argv)
+int tr069launch()
 {
 
     cwmp_pid_t pid;
@@ -158,33 +162,35 @@ int tr069launch(int argc, char **argv)
 #endif
     pid = getpid();
 
+    LOGI("info now in tr069 launch \n");
 //    cwmp_log_init("/var/log/cwmpd.log", CWMP_LOG_DEBUG);
-    cwmp_log_init("/system/etc/cwmpd.log", CWMP_LOG_DEBUG);
+    cwmp_log_init("/sdcard/chaocwmp/cwmpd.log", CWMP_LOG_DEBUG);
     cwmp_global_pool = pool_create(POOL_DEFAULT_SIZE);
     cwmp = pool_palloc(cwmp_global_pool, sizeof(cwmp_t));
 
-    cwmp_conf_open("/system/etc/cwmp.conf");
+    LOGI("info now in \n");
+    cwmp_conf_open("/sdcard/chaocwmp/cwmp.conf");
 
-    cwmp_enable=cwmp_conf_get_int("cwmp:enable");//¶ÁÈ¡ÅäÖÃÎÄ¼þÖÐµÄenableµÄÖµ£¬Ê¹ÄÜ¶ÁÈ¡ÅäÖÃÎÄ¼þ¹¦ÄÜ
+    cwmp_enable=cwmp_conf_get_int("cwmp:enable");//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ðµï¿½enableï¿½ï¿½Öµï¿½ï¿½Ê¹ï¿½Ü¶ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½
     if(!cwmp_enable)
     {
         exit(-1);
     }
 
-    cwmp_getopt(argc, argv);
+    //cwmp_getopt(argc, argv);
 
     //cwmp_init_db();
 
     cwmp_set_var(cwmp);
     cwmp_daemon();
 
-    cwmp_conf_init(cwmp);//½«cwmp.confÄÚÈÝ¸³¸øcwmp
+    cwmp_conf_init(cwmp);//ï¿½ï¿½cwmp.confï¿½ï¿½ï¿½Ý¸ï¿½ï¿½ï¿½cwmp
 
 #ifdef USE_CWMP_OPENSSL
     cwmp_init_ssl(cwmp);
 #endif
 
-    cwmp_model_load(cwmp, "/system/etc/device.xml");
+    cwmp_model_load(cwmp, "/sdcard/chaocwmp/device.xml");
     cwmp_process_start_master(cwmp);
 
     return 0;
