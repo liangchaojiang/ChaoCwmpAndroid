@@ -166,10 +166,6 @@ int tr069launch()
 #endif
     pid = getpid();
 
-    int status;
-
-    status = mkdir("/sdcard/chaocwmp", S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-
     LOGI("info now in tr069 launch %d\n",status);
 //    cwmp_log_init("/var/log/cwmpd.log", CWMP_LOG_DEBUG);
     cwmp_log_init("/sdcard/chaocwmp/cwmpd.log", CWMP_LOG_DEBUG);
