@@ -166,7 +166,7 @@ int tr069launch()
 #endif
     pid = getpid();
 
-    LOGI("info now in tr069 launch %d\n",status);
+    LOGI("info now in tr069 launch\n");
 //    cwmp_log_init("/var/log/cwmpd.log", CWMP_LOG_DEBUG);
     cwmp_log_init("/sdcard/chaocwmp/cwmpd.log", CWMP_LOG_DEBUG);
     cwmp_global_pool = pool_create(POOL_DEFAULT_SIZE);
