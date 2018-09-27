@@ -815,7 +815,7 @@ int cwmp_agent_download_file(download_arg_t * dlarg)
 {
     int faultcode = 0;
     char * fromurl = dlarg->url;
-    char * tofile = "/system/etc/download.img";
+    char * tofile = "/sdcard/chaocwmp/download.img";
 
     FUNCTION_TRACE();
 
