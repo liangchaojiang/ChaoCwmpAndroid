@@ -33,7 +33,8 @@ public class ConfFileControl {
             if(str.startsWith("[")) continue;
             Pattern pattern = Pattern.compile("=");
             String [] strs = pattern.split(str);
-            mapConf.put(strs[0],strs[1]);
+            if(!strs[0].isEmpty())
+                mapConf.put(strs[0],strs[1]);
             System.out.println(str);
         }
         br.close();

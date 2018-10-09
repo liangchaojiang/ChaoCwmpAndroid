@@ -73,11 +73,13 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 System.out.println("chaocwmp is:"+ ConfFileControl.checkFile("/sdcard/chaocwmp"));
                 System.out.println("chaocwmp/cwmpd.log is:"+ ConfFileControl.checkFile("/sdcard/chaocwmp/cwmpd.log"));
-                try {
+                /*try {
                     ConfFileControl.setConf("/sdcard/chaocwmp/cwmp.conf","enable","1");
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                }*/
+                ListViewDialog listViewDialog = new ListViewDialog(MainActivity.this);
+                listViewDialog.show();
             }
         });
     }
