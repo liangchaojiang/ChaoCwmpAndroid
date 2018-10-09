@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.IOException;
 
 public class MainActivity extends Activity {
     Button bt1,bt2;
@@ -48,7 +49,7 @@ public class MainActivity extends Activity {
                         }
                     }
                 });
-        if(!FileCheck.checkFile("/sdcard/chaocwmp/cwmpd.log")) builder.create().show();
+        if(!ConfFileControl.checkFile("/sdcard/chaocwmp/cwmpd.log")) builder.create().show();
 
         bt1 = (Button)findViewById(R.id.bt1);
         bt2 = (Button)findViewById(R.id.bt2);
@@ -70,8 +71,13 @@ public class MainActivity extends Activity {
         bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("chaocwmp is:"+FileCheck.checkFile("/sdcard/chaocwmp"));
-                System.out.println("chaocwmp/cwmpd.log is:"+FileCheck.checkFile("/sdcard/chaocwmp/cwmpd.log"));
+                System.out.println("chaocwmp is:"+ ConfFileControl.checkFile("/sdcard/chaocwmp"));
+                System.out.println("chaocwmp/cwmpd.log is:"+ ConfFileControl.checkFile("/sdcard/chaocwmp/cwmpd.log"));
+                try {
+                    ConfFileControl.setConf("/sdcard/chaocwmp/cwmp.conf","enable","1");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
