@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ import java.util.Map;
 public class ListViewDialog extends Dialog {
     private final Context mContext;
     private ListView mListView;
+    Button btCancel,btConform;
     public ListViewDialog(Context context) {
         super(context);
         mContext = context;
@@ -26,9 +28,17 @@ public class ListViewDialog extends Dialog {
         initListView();
     }
     private void initView() {
-        View contentView = View.inflate(mContext, R.layout.content_dialog, null);
+        final View contentView = View.inflate(mContext, R.layout.content_dialog, null);
         mListView = (ListView) contentView.findViewById(R.id.lv);
+        btCancel = (Button)contentView.findViewById(R.id.btcancel);
+        btConform = (Button)contentView.findViewById(R.id.btconform);
         setContentView(contentView);
+        btCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("this is cancel");
+            }
+        });
     }
     private void initListView() {
         ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(mContext,
