@@ -318,7 +318,7 @@ enum InformEventType
 struct cwmp_st
 {
 	cwmp_t			* old_cwmp;
-	int new_request;//ÅÐ¶ÏÊÇ·ñÎªÐÂÇëÇó
+	int new_request;//ï¿½Ð¶ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	int httpd_port;
 
 	int    cpe_auth;
@@ -352,7 +352,7 @@ struct cwmp_st
 
 	event_global_t    event_global;
 
-	transfer_t    transfer_info;      //ÓÃÓÚDownloadºÍUpload
+	transfer_t    transfer_info;      //ï¿½ï¿½ï¿½ï¿½Downloadï¿½ï¿½Upload
 
 	queue_t  *	queue;
 

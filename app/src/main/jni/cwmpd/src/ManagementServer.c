@@ -110,7 +110,7 @@ int cpe_get_igd_ms_connectionrequesturl(cwmp_t * cwmp, const char * name, char *
 {
     char buf[256]={0};
     char local_ip[32]={0};
-    cpe_get_localip("eth0", local_ip);
+    cpe_get_localip(cwmp_conf_pool_get(pool, "cwmp:cpe_ifc"), local_ip);
     int port = cwmp_conf_get_int("cwmpd:httpd_port");
     snprintf(buf, 256, "http://%s:%d", local_ip, port);
     *value = PSTRDUP(buf);

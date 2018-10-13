@@ -30,7 +30,7 @@ LOCAL_SRC_FILES := libcwmp/src/buffer.c libcwmp/src/cfg.c libcwmp/src/cwmp.c lib
 libcwmp/src/ini.c libcwmp/src/log.c libcwmp/src/md5.c libcwmp/src/memory.c libcwmp/src/session.c libcwmp/src/util.c \
 libcwmp/src/event.c libcwmp/src/queue.c libcwmp/src/model.c libcwmp/src/callback.c
 LOCAL_STATIC_LIBRARIES := libpool libxmlet
-LOCAL_CFLAGS += -DUSE_CWMP_MEMORY_POOL -DSTB_CMCC_MODEL
+LOCAL_CFLAGS += -DUSE_CWMP_MEMORY_POOL
 LOCAL_LDLIBS := \
 	-lz \
 	-lm
@@ -45,7 +45,7 @@ cwmpd/src/agent.c cwmpd/src/data_model.c
 
 LOCAL_STATIC_LIBRARIES := libcwmp
 LOCAL_CFLAGS += -DUSE_CWMP_MEMORY_POOL \
-	-D_GNU_SOURCE  -DSTB_CMCC_MODEL
+	-D_GNU_SOURCE
 
 LOCAL_LDLIBS += \
 	-lz \

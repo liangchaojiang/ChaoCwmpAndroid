@@ -54,8 +54,8 @@ void cwmp_conf_init(cwmp_t * cwmp)
 	}
 
     cwmp->acs_url   =   cwmp_conf_pool_get(pool, "cwmp:acs_url"); //  "http://192.168.0.69:8000/otnms/acs/webservice.action";//cwmp_nvram_getdup(pool, "cwmp:acs_url");
-
-    cwmp->cpe_mf    =   cwmp_conf_pool_get(pool, "cwmp:cpe_manufacture"); //     "ZTE"; //cwmp_nvram_getdup(pool, "cwmp:cpe_manufacture");
+	cwmp->cpe_ifc   =   cwmp_conf_pool_get(pool, "cwmp:cpe_ifc");
+	cwmp->cpe_mf    =   cwmp_conf_pool_get(pool, "cwmp:cpe_manufacture"); //     "ZTE"; //cwmp_nvram_getdup(pool, "cwmp:cpe_manufacture");
 
     cwmp->cpe_summary = cwmp_conf_pool_get(pool, "cwmp:cpe_summary");
 
@@ -69,7 +69,7 @@ void cwmp_conf_init(cwmp_t * cwmp)
 
     cwmp->cpe_pc    =   cwmp_conf_pool_get(pool, "cwmp:cpe_pc"); //      "ZXECS EBG2100";
 
-    cwmp_log_debug("url:%s\nmf:%s\nsummary:%s\noui:%s\nsn:%s\nname:%s\npc:%s\nhttpd port:%d\n",cwmp->acs_url, cwmp->cpe_mf,cwmp->cpe_summary, cwmp->cpe_oui, cwmp->cpe_sn, cwmp->cpe_name, cwmp->cpe_pc,
+    cwmp_log_debug("url:%s\ncpe_ifc:%s\nmf:%s\nsummary:%s\noui:%s\nsn:%s\nname:%s\npc:%s\nhttpd port:%d\n",cwmp->acs_url,cwmp->cpe_ifc ,cwmp->cpe_mf,cwmp->cpe_summary, cwmp->cpe_oui, cwmp->cpe_sn, cwmp->cpe_name, cwmp->cpe_pc,
                    cwmp->httpd_port);
 
 
