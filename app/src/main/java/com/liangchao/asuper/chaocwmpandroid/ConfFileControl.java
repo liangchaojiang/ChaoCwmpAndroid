@@ -52,8 +52,16 @@ public class ConfFileControl {
         BufferedReader br= new BufferedReader(in);
         CharArrayWriter tempStream = new CharArrayWriter();
         while ((str = br.readLine())!=null){
-            if(str.startsWith("#")) continue;
-            if(str.startsWith("[")) continue;
+            if(str.startsWith("#")) {
+                tempStream.append(System.getProperty("line.separator"));
+                tempStream.write(str);
+                continue;
+            }
+            if(str.startsWith("[")){
+                tempStream.append(System.getProperty("line.separator"));
+                tempStream.write(str);
+                continue;
+            }
             Pattern pattern = Pattern.compile("=");
             String [] strs = pattern.split(str);
 
